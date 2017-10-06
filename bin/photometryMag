@@ -1,0 +1,10 @@
+#!/bin/bash
+
+uvotsource << END
+$1
+region_files/src.reg
+region_files/bkg.reg
+3
+$2
+
+END

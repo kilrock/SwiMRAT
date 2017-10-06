@@ -1,0 +1,16 @@
+#!/bin/bash
+
+target=$1
+instrument=$2
+
+cd $target
+
+if ["$instrument" = "UVOT"]; then
+    UVOTreduce
+    UVOTplot
+elif ["$instrument" = "XRT"]; then
+    XRTreduce
+    XRTplot_bayes
+else
+    echo 'Invalid Input.'
+fi

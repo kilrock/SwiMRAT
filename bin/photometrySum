@@ -1,0 +1,6 @@
+#!/bin/bash
+
+uvotimsum << END
+$1
+$2
+END

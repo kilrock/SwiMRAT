@@ -1,0 +1,20 @@
+#!/bin/bash
+
+TargetName=$1
+
+echo $TargetName
+
+mkdir $TargetName
+cd $TargetName
+
+mkdir swift_data
+mkdir region_files
+mkdir UVOT_fits
+mkdir XRT_lightcurves
+mkdir final_science
+cd final_science
+mkdir plots
+mkdir UVOT
+mkdir XRTbayes
+cd XRTbayes
+mkdir raw

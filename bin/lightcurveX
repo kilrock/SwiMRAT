@@ -1,0 +1,23 @@
+#!/bin/bash
+
+xselect << END 
+xsel
+read event
+./
+$1
+yes
+filter region region_files/xsrc.reg
+extract curve
+save curve
+XRT_lightcurves/$2
+clear region
+filter region region_files/xbkg.reg
+extract curve
+save curve
+XRT_lightcurves/$3
+exit
+no
+
+END
+
+rm xselect.log

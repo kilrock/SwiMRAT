@@ -1,0 +1,44 @@
+Welcome to SwiMRAT
+	1) reduce data / plot light curves
+	2) add target
+	
+	home_dir=`pwd`
+
+1) which target?
+   --> print out list of targets
+
+2) add target
+       	  mkdir [Name]
+       	  cd [Name]
+
+   (bash) script targetinfo.txt
+   *run text maker program*
+   (Python)-->Queries
+   Name:
+   Type:
+   Coordinates: 
+   Galactic Nh (Weighted, Dickey & Lockman): ________ /Cm/Cm
+   Flux Conversion: _________ Ergs/Cm/Cm/S
+   Z = 
+   Luminosity Distance = 
+   (bash) **remove top line**
+
+   --> create directory structure
+       mkdir swift_data
+       mkdir region_files
+       mkdir UVOT_fits
+       mkdir XRT_lightcurves
+       mkdir final_science
+       cd final_science
+       mkdir plots
+       mkdir UVOT
+       mkdir XRTbayes
+       cd XRTbayes
+       mkdir raw
+
+   cd $home_dir
+
+   **create region file**
+   grep for coordinates
+   remove the colons
+   

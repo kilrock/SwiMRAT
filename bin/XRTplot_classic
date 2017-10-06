@@ -1,0 +1,11 @@
+#!/bin/bash
+
+objectName=`grep 'Name' targetinfo.txt | cut -d ' ' -f 2-2`
+fluxConversion=`grep 'Unabsorbed Flux Conversion' targetinfo.txt | cut -d ' ' -f 4-4`
+luminosityDistance=`grep 'Luminosity Distance' targetinfo.txt | cut -d ' ' -f 4-4`
+
+XRTplot_classic.py  >/dev/null << END
+$objectName
+$fluxConversion
+$luminosityDistance
+END

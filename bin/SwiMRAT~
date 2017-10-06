@@ -1,0 +1,53 @@
+#!/home/kilrock/anaconda2/bin/python
+
+import subprocess
+
+def main():
+    print 'Welcome to SwiMRAT\n1) plot\n2) add target'
+    choice = raw_input('Enter number choice: ')
+
+    if '1' in choice:
+        plotMenu()
+    elif '2' in choice:
+        addTarget()
+    elif 'exit' in choice:
+        return
+    else:
+        print 'Invalid choice'
+        main()
+
+def plotMenu():
+    targetName = raw_input('Select Target: ')
+    instrument =  raw_input('Select instrument:\nUVOT\nXRT\n> ')
+    if instrument=='UVOT':
+        fullUVOT(targetName)
+    elif instrument=='XRT':
+        fullXRT(targetName)
+    else:
+        print 'Invalid instrument input.'
+
+def fullUVOT(targetName):
+    #runs reduction and plotting scripts for all UVOT bands
+    #takes the object name (directory) as only argument
+    subprocess.call('cd %s' % targetName, shell=True, cwd=targetName)
+    subprocess.call('UVOTreduce', shell=True, cwd=targetName)
+    subprocess.call('UVOTplot', shell=True, cwd=targetName)
+
+def fullXRT(targetName):
+    subprocess.call('XRTreduce', shell=True, cwd=targetName)
+    method = raw_input('Select analysis method:\n1) Classic 2) Bayes\n>')
+    if method=='1':
+        subprocess.call('XRTplot_classic', shell=True, cwd=targetName)
+    elif method=='2':
+        subprocess.call('XRTplot_bayes', shell=True, cwd=targetName)
+    else:
+        print 'Invalid method input.'
+
+def addTarget():
+    TargetName = raw_input('Enter new target name: ')
+    subprocess.call('addTarget %s' % TargetName, shell=True)
+    subprocess.call('targetinfo.txt_maker %s' % TargetName, shell=True, cwd=TargetName)
+    subprocess.call('regionFiles', shell=True, cwd=TargetName)
+    return
+
+main()

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm UVOT_fits/*.fits
+rm final_science/UVOT/*.fits
+makeScript_UVOT.py
+bash -e allUVOT.bash
+rm allUVOT.bash u*.bash

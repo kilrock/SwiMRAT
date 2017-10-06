@@ -1,0 +1,7 @@
+#!/bin/bash
+
+objectName=`grep 'Name' targetinfo.txt | cut -d ' ' -f 2-2`
+
+UVOTplot.py >/dev/null <<END
+$objectName
+END

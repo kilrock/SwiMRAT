@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rm XRT_lightcurves/*.lc
+makeScript_XRT.py
+bash -e x.bash
+rm x.bash

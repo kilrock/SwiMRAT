@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#plots for 3 sigma
+
+objectName=`grep 'Name' targetinfo.txt | cut -d ' ' -f 2-2`
+
+XRTplot_bayes.py  >/dev/null << END
+$objectName
+3sig
+END

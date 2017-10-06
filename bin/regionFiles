@@ -1,0 +1,6 @@
+#!/bin/bash
+
+RA=`grep 'Coordinates' targetinfo.txt | cut -d ' ' -f 2-2`
+DEC=`grep 'Coordinates' targetinfo.txt | cut -d ' ' -f 3-3`
+
+regionFiles.py $RA $DEC

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+fluxConversion=`grep 'Unabsorbed Flux Conversion' targetinfo.txt | cut -d ' ' -f 4-4`
+luminosityDistance=`grep 'Luminosity Distance' targetinfo.txt | cut -d ' ' -f 4-4`
+objectName=`grep 'Name' targetinfo.txt | cut -d ' ' -f 2-2`
+
+XRTbayes.py  >/dev/null << END
+$fluxConversion
+$luminosityDistance
+END
+
+rm final_science/XRTbayes/*.txt
+cp final_science/XRTbayes/raw/*.txt final_science/XRTbayes/
+
+#removing observationID and sorting by MJD for use in stacking programs
+for raw in `ls final_science/XRTbayes/*.txt`;
+do
+    cut -d ' ' -f 2- $raw > $raw.temp
+    sort -s -n -k 1,1 $raw.temp > $raw.edit
+    mv $raw.edit $raw
+    rm $raw.temp
+done
+
+#stacks close epochs and recalculates limits for those stacks
+bayeslittlestack.py >/dev/null << ENDL
+$fluxConversion
+$luminosityDistance
+ENDL
+
+#creates a file for full stacks in each confidence level
+bayesfullstack.py >/dev/null << ENDF
+$fluxConversion
+$luminosityDistance
+ENDF
+
+#removing columns for exposure time, source counts, and background counts
+for datafilename in final_science/XRTbayes/99.txt final_science/XRTbayes/threeSig.txt final_science/XRTbayes/fourSig.txt final_science/XRTbayes/fiveSig.txt ;
+do
+    cut -d ' ' -f -2,5- $datafilename > $datafilename.temp
+    mv $datafilename.temp $datafilename
+done
