@@ -1,9 +1,22 @@
 Programmer: Melanie Kae Olaes
 Date: 20182304
+
 Notes
--The following guide outlines the options when running "SwiMRAT".
+-The following guide outlines the options when running Swift Multiwavelength Reducation and Analysis Tools "SwiMRAT".
 -Target folder & target info file (option 2) must be created before analyzing data (option 1)
 -This guide is not complete.
+
+Installation
+-Assumes the following programs are installedin default locations:
+	HEAsoft
+	ftools
+-Considers the following packages are installed for python:
+	numpy
+	astropy
+	scipy.stats
+-Otherwise, a completely scripted program.
+
+---
 
 Welcome to SwiMRAT
 	Option 1) reduce data / plot light curves
